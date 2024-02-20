@@ -66,16 +66,6 @@ pub mod token_presale {
         );
     }
 
-    pub fn update_auth(
-        ctx: Context<UpdateAuth>,
-        identifier: u8
-    ) -> Result<()> {
-        return update_auth::update_auth(
-            ctx,
-            identifier
-        );
-    }
-
     pub fn deposit_token(
         ctx: Context<DepositToken>,
         amount: u64,
