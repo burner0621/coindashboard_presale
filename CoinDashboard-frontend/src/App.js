@@ -32,7 +32,7 @@ function App() {
     { ft: "USDT", icon: USDT },
   ];
   return (
-    <div className="App bg-slate-800">
+    <div className="App bg-[#071619]" style={{ backgroundImage: "url('/assets/img/pattern.png')"}}>
       <ThemeContext.Provider value={tokens}>
         <WalletConnectProvider>
           <Navbar></Navbar>
@@ -47,7 +47,7 @@ function App() {
             <HowTo />
           </div>
           <Copyright />
-          <ToastContainer autoClose={3000} draggableDirection="x" />
+          <ToastContainer autoClose={3000} draggableDirection="x" toastStyle={{ backgroundColor: "#05bfc4", color: "white" }} />
         </WalletConnectProvider>
       </ThemeContext.Provider>
     </div>

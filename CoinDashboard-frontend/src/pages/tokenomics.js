@@ -18,63 +18,49 @@ const Tokenomics = () => {
             </div>
             <div className="flex-wrap md:flex-nowrap flex flex-row gap-8 justify-center">
                 <div className="w-[130px] flex flex-col gap-[18.9px] items-center">
-                    <CircularProgress sx={{ '--CircularProgress-size': '93px' }} thickness='8' variant="determinate" value={10}>
-                        <p style={{ fontSize: '28px', color: 'black' }}>{10}</p>
-                    </CircularProgress>
+                    <CircleProgressBar percent={10}/>
                     <div className="flex flex-col gap-[7.56px]">
                         <div>Pre-Sale</div>
                         <p className="text-[14px] leading-[21px] text-white/75">10% of total supply</p>
                     </div>
                 </div>
                 <div className="w-[130px] flex flex-col gap-[18.9px] items-center">
-                    <CircularProgress sx={{ '--CircularProgress-size': '93px' }} thickness='8' variant="determinate" value={10}>
-                        <p style={{ fontSize: '28px', color: 'black' }}>{10}</p>
-                    </CircularProgress>
+                    <CircleProgressBar percent={10}/>
                     <div className="flex flex-col gap-[7.56px]">
                         <div>Stake Pool</div>
                         <p className="text-[14px] leading-[21px] text-white/75">10% of total supply</p>
                     </div>
                 </div>
                 <div className="w-[130px] flex flex-col gap-[18.9px] items-center">
-                    <CircularProgress sx={{ '--CircularProgress-size': '93px' }} thickness='8' variant="determinate" value={5}>
-                        <p style={{ fontSize: '28px', color: 'black' }}>{5}</p>
-                    </CircularProgress>
+                    <CircleProgressBar percent={5}/>
                     <div className="flex flex-col gap-[7.56px]">
                         <div>Airdrops</div>
                         <p className="text-[14px] leading-[21px] text-white/75">5% of total supply</p>
                     </div>
                 </div>
                 <div className="w-[130px] flex flex-col gap-[18.9px] items-center">
-                    <CircularProgress sx={{ '--CircularProgress-size': '93px' }} thickness='8' variant="determinate" value={15}>
-                        <p style={{ fontSize: '28px', color: 'black' }}>{15}</p>
-                    </CircularProgress>
+                    <CircleProgressBar percent={15}/>
                     <div className="flex flex-col gap-[7.56px]">
                         <div>Team + Advisors</div>
                         <p className="text-[14px] leading-[21px] text-white/75">15% of total supply</p>
                     </div>
                 </div>
                 <div className="w-[130px] flex flex-col gap-[18.9px] items-center">
-                    <CircularProgress sx={{ '--CircularProgress-size': '93px' }} thickness='8' variant="determinate" value={20}>
-                        <p style={{ fontSize: '28px', color: 'black' }}>{20}</p>
-                    </CircularProgress>
+                    <CircleProgressBar percent={20}/>
                     <div className="flex flex-col gap-[7.56px]">
                         <div>Reserve</div>
                         <p className="text-[14px] leading-[21px] text-white/75">20% of total supply</p>
                     </div>
                 </div>
                 <div className="w-[130px] flex flex-col gap-[18.9px] items-center">
-                    <CircularProgress sx={{ '--CircularProgress-size': '93px' }} thickness='8' variant="determinate" value={5}>
-                        <p style={{ fontSize: '28px', color: 'black' }}>{5}</p>
-                    </CircularProgress>
+                    <CircleProgressBar percent={5}/>
                     <div className="flex flex-col gap-[7.56px]">
                         <div>Reserve for Liquidity Pool</div>
                         <p className="text-[14px] leading-[21px] text-white/75">5% of total supply</p>
                     </div>
                 </div>
                 <div className="w-[130px] flex flex-col gap-[18.9px] items-center">
-                    <CircularProgress sx={{ '--CircularProgress-size': '93px' }} thickness='8' variant="determinate" value={35}>
-                        <p style={{ fontSize: '28px', color: 'black' }}>{35}</p>
-                    </CircularProgress>
+                    <CircleProgressBar percent={35}/>
                     <div className="flex flex-col gap-[7.56px]">
                         <div>Initial Circulating Supply</div>
                         <p className="text-[14px] leading-[21px] text-white/75">35% of total supply</p>
@@ -86,4 +72,14 @@ const Tokenomics = () => {
     )
 }
 
+const CircleProgressBar = ({percent}) => {
+    return (
+        <div class={`progress`}>
+            <span class="title timer" data-from="0" data-to={percent} data-speed="1800">{percent}</span>
+            <div class="overlay"></div>
+            <div class={`left animate${percent}`}></div>
+            <div class="right"></div>
+        </div>
+    )
+}
 export default Tokenomics;

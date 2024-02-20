@@ -1,8 +1,40 @@
-
+import { useState, useCallback, useEffect } from 'react'
 import "./pages.css"
+import {
+    useConnection,
+    useWallet
+} from "@solana/wallet-adapter-react";
+import * as splToken from "@solana/spl-token";
+import {
+    TOKEN_PUBKEY,
+} from "../constants"
+import usePresale from "../hooks/usePresale.js"
+import { Icon, IconType } from "../components/icons";
 import { Divider } from "@mui/material"
 
 const Claim = () => {
+
+    const { claimToken, transactionPending } = usePresale();
+    const { connection } = useConnection();
+    const { publicKey } = useWallet();
+    const [balance, setBalance] = useState (0)
+
+    const getBalance = useCallback(async() => {
+        if (publicKey && connection) {
+            try{
+                const tokenAddress = await splToken.getAssociatedTokenAddress(TOKEN_PUBKEY, publicKey)
+                const tokenDetails = await splToken.getAccount(connection, tokenAddress)
+                if (tokenDetails.amount) setBalance (Number(tokenDetails.amount) / 1000000)
+            } catch (e) {
+                console.log (e)
+            }
+        }
+    }, [publicKey])
+
+    useEffect(() => {
+        getBalance()
+    }, [getBalance])
+
     return (
         <div className="w-full flex flex-col items-center gap-6">
             <div className="w-full md:w-[503px] flex flex-col gap-4">
@@ -17,10 +49,15 @@ const Claim = () => {
                     <Divider />
                     <div className="h-[34px] flex flex-row gap-2 items-center justify-center">
                         <img src="/assets/icon/ic_cdbd.svg" width={'34px'} />
-                        <div className="text-2xl">25,000</div>
+                        <div className="text-2xl">{balance}</div>
                     </div>
                 </div>
-                <button className="h-[36px] rounded-2xl bg-cyan-400 font-medium">Claim now</button>
+                {transactionPending ? 
+                    <div className="flex flex-row items-center justify-center">
+                        <Icon type={IconType.LOADING} className="w-14 h-14" />
+                    </div> : 
+                    <button className="h-[36px] rounded-2xl bg-cyan-400 font-medium" onClick={claimToken}>Claim now</button>
+                }
             </div>
         </div>
     );

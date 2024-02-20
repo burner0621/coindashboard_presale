@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect,useCallback } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import PrePayInput from "./prePayInput"
 import PreReceiveInput from "./preReceiveInput"
 import { Icon, IconType } from "./icons";
@@ -10,11 +10,12 @@ import Countdown from "react-countdown";
 import ThemeContext from '../context/themeContext';
 import usePresale from "../hooks/usePresale.js"
 
-import { JUP_PRICEFEED_ID, 
-        JUP_TOKEN_PUBKEY, 
-        USDT_TOKEN_PUBKEY,
-        USDC_TOKEN_PUBKEY,
-        PRICE_PER_TOKEN 
+import {
+    JUP_PRICEFEED_ID,
+    JUP_TOKEN_PUBKEY,
+    USDT_TOKEN_PUBKEY,
+    USDC_TOKEN_PUBKEY,
+    PRICE_PER_TOKEN
 } from "../constants";
 
 const PresaleCard = () => {
@@ -26,7 +27,7 @@ const PresaleCard = () => {
     const [tokenAmount, setTokenAmount] = useState(0);
     const [dropIndex, setDropIndex] = useState(0);
     const [ratio, setRatio] = useState(1)
-    const [balance, setBalance] = useState (0)
+    const [balance, setBalance] = useState(0)
     const [canBuy, setCanBuy] = useState(true);
 
     useEffect(() => {
@@ -61,13 +62,13 @@ const PresaleCard = () => {
             toast.warning("Please check balance again.");
             return;
         }
-        if (tokens[dropIndex].ft === "SOL") {buyToken(quoteAmount);}
+        if (tokens[dropIndex].ft === "SOL") { buyToken(quoteAmount); }
         else {
             if (tokens[dropIndex].ft === "JUP") {
                 depositToken(JUP_TOKEN_PUBKEY, JUP_PRICEFEED_ID, quoteAmount)
-            }else if (tokens[dropIndex].ft === "USDT") {
+            } else if (tokens[dropIndex].ft === "USDT") {
                 depositToken(USDT_TOKEN_PUBKEY, JUP_PRICEFEED_ID, quoteAmount)
-            }else if (tokens[dropIndex].ft === "USDC") {
+            } else if (tokens[dropIndex].ft === "USDC") {
                 depositToken(USDC_TOKEN_PUBKEY, JUP_PRICEFEED_ID, quoteAmount)
             }
         }
@@ -81,7 +82,7 @@ const PresaleCard = () => {
                     {Date.now() >= startTime * 1000 && Date.now() < endTime * 1000 && "Pre-Sale Ends In"}
                     {Date.now() > endTime * 1000 && ""}
                 </div>
-                {Date.now() < endTime * 1000 ? (
+                {endTime ? Date.now() < endTime * 1000 ? (
                     <Countdown
                         date={
                             Date.now() < startTime * 1000 ? startTime * 1000 : endTime * 1000
@@ -92,12 +93,15 @@ const PresaleCard = () => {
                     <span className="text-3xl font-bold text-[#d00711]">
                         Presale Completed.
                     </span>
-                )}
+                ):<span className="text-3xl font-bold text-[#00CABE]">
+                    Please connect your wallet.
+                </span> 
+                }
                 <div className="w-full h-0 border border-[#587267]" />
-                <PrePayInput 
-                    title="Amount you pay" 
-                    value={quoteAmount} 
-                    setValue={(val) => setQuoteAmount(val)} 
+                <PrePayInput
+                    title="Amount you pay"
+                    value={quoteAmount}
+                    setValue={(val) => setQuoteAmount(val)}
                     dropIndex={dropIndex}
                     setDropIndex={(val) => setDropIndex(val)}
                     balance={balance}
@@ -125,15 +129,23 @@ const PresaleCard = () => {
             {(canBuy && !transactionPending) && (
                 <button
                     className="w-full h-9 flex flex-row items-center justify-center rounded-3xl px-4 py-2 text-[14px] bg-cyan-500"
-                    onClick={ onBuyToken }
+                    onClick={onBuyToken}
                 >
                     Buy Now
                 </button>
             )}
-            {transactionPending && (
+            {(canBuy && transactionPending) && 
                 <div className="flex flex-row items-center justify-center">
                     <Icon type={IconType.LOADING} className="w-14 h-14" />
                 </div>
+            }
+            {!canBuy && (
+                <button
+                    className="w-full h-9 flex flex-row items-center justify-center rounded-3xl px-4 py-2 text-[14px] bg-cyan-500"
+                    disabled
+                >
+                    Buy Now
+                </button>
             )}
         </div>
     )

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useCallback } from 'react'
 import {
     useConnection,
     useWallet
@@ -35,7 +35,7 @@ const PrePayInput = ({title, value, setValue, dropIndex, setDropIndex, balance, 
         setDropIndex(idx);
     }
 
-    const getBalance = async() => {
+    const getBalance = useCallback(async() => {
         if (publicKey && connection) {
             try{
                 if (tokens[dropIndex].ft === "SOL") {
@@ -58,13 +58,11 @@ const PrePayInput = ({title, value, setValue, dropIndex, setDropIndex, balance, 
                 console.log (e)
             }
         }
-    }
+    },[publicKey])
 
-    getBalance()
-
-    // useEffect(() => {
-    //     getBalance()
-    // }, [dropIndex, publicKey])
+    useEffect(() => {
+        getBalance()
+    }, [getBalance])
 
     return (
         <div className="flex flex-col gap-2">
