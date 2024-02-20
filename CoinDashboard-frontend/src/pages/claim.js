@@ -6,6 +6,7 @@ import {
 } from "@solana/wallet-adapter-react";
 import * as splToken from "@solana/spl-token";
 import {
+    TOKEN_DECIMAL,
     TOKEN_PUBKEY,
 } from "../constants"
 import usePresale from "../hooks/usePresale.js"
@@ -14,7 +15,8 @@ import { Divider } from "@mui/material"
 
 const Claim = () => {
 
-    const { claimToken, transactionPending } = usePresale();
+    const { claimToken, transactionPending, buyAmount, claimedAmount } = usePresale();
+
     const { connection } = useConnection();
     const { publicKey } = useWallet();
     const [balance, setBalance] = useState (0)
@@ -49,7 +51,7 @@ const Claim = () => {
                     <Divider />
                     <div className="h-[34px] flex flex-row gap-2 items-center justify-center">
                         <img src="/assets/icon/ic_cdbd.svg" width={'34px'} />
-                        <div className="text-2xl">{balance}</div>
+                        <div className="text-2xl">{Number((buyAmount - claimedAmount)/(10 ** TOKEN_DECIMAL)).toFixed(2)}</div>
                     </div>
                 </div>
                 {transactionPending ? 

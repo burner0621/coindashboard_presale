@@ -74,11 +74,11 @@ const Tokenomics = () => {
 
 const CircleProgressBar = ({percent}) => {
     return (
-        <div class={`progress`}>
-            <span class="title timer" data-from="0" data-to={percent} data-speed="1800">{percent}</span>
-            <div class="overlay"></div>
-            <div class={`left animate${percent}`}></div>
-            <div class="right"></div>
+        <div className={`progress`}>
+            <span className="title timer" data-from="0" data-to={percent} data-speed="1800">{percent}</span>
+            <div className="overlay"></div>
+            <div className={`left animate${percent}`}></div>
+            <div className="right"></div>
         </div>
     )
 }

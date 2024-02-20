@@ -150,6 +150,11 @@ export const IDL = {
           "isSigner": true
         },
         {
+          "name": "presaleAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
@@ -236,17 +241,6 @@ export const IDL = {
           "type": "u8"
         }
       ]
-    },
-    {
-      "name": "getPrice",
-      "accounts": [
-        {
-          "name": "pythAccount",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
     },
     {
       "name": "startPresale",
@@ -464,10 +458,6 @@ export const IDL = {
         }
       ],
       "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        },
         {
           "name": "identifier",
           "type": "u8"

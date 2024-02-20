@@ -4,7 +4,7 @@ import {
     useWallet,
 } from "@solana/wallet-adapter-react";
 import {
-    PRESALE_AUTHORITY, 
+    PRESALE_AUTHORITY,
     TOKEN_PUBKEY,
     USDT_TOKEN_PUBKEY,
     USDC_TOKEN_PUBKEY,
@@ -21,7 +21,6 @@ const PresalePart = () => {
 
     const { publicKey } = useWallet();
     const {
-        updateAuth,
         createPresale,
         depositToken,
         updatePresale,
@@ -43,13 +42,11 @@ const PresalePart = () => {
         await buyToken(0.1);
     };
 
-    const onWithdrawToken = async () => {
-        await withdrawToken();
+    const onWithdrawToken = async (withdrawingToken) => {
+        await withdrawToken(withdrawingToken);
     };
 
-    const onUpdateAuth = async () => {
-        await updateAuth();
-    };
+
     const onUpdatePresale = async () => {
         await updatePresale();
     };
@@ -64,14 +61,9 @@ const PresalePart = () => {
 
     return (
         <div className="w-full display-flex justify-content-center align-items-center">
-            <div className="px-4 flex flex-col lg:flex-row gap-[50px] lg:gap-[50px] xl:gap-[206px] items-center justify-center">
-
-                <DescriptionPart />
-                <PresaleCard />
-            </div>
             {
                 publicKey && publicKey.toBase58() === PRESALE_AUTHORITY.toBase58() &&
-                <div className="flex flex-row items-center gap-2">
+                <div className="grid grid-cols-4 items-center gap-2 mb-5">
                     <button
                         className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
                         onClick={onCreatePresale}
@@ -86,7 +78,7 @@ const PresalePart = () => {
                     </button>
                     <button
                         className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
-                        onClick={() => onDepositToken(TOKEN_PUBKEY, JUP_PRICEFEED_ID, 100000)}
+                        onClick={() => onDepositToken(TOKEN_PUBKEY, JUP_PRICEFEED_ID, 10000000)}
                     >
                         Deposit MintToken
                     </button>
@@ -128,18 +120,35 @@ const PresalePart = () => {
                     </button>
                     <button
                         className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
-                        onClick={onWithdrawToken}
+                        onClick={() => onWithdrawToken(TOKEN_PUBKEY)}
                     >
-                        Withdraw Token
+                        Withdraw MintToken
                     </button>
                     <button
                         className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
-                        onClick={onUpdateAuth}
+                        onClick={() => onWithdrawToken(USDT_TOKEN_PUBKEY)}
                     >
-                        Update Auth
+                        Withdraw USDTToken
+                    </button>
+                    <button
+                        className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
+                        onClick={() => onWithdrawToken(USDC_TOKEN_PUBKEY)}
+                    >
+                        Withdraw USDCToken
+                    </button>
+                    <button
+                        className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
+                        onClick={() => onWithdrawToken(JUP_TOKEN_PUBKEY)}
+                    >
+                        Withdraw JUPToken
                     </button>
                 </div>
             }
+            <div className="px-4 flex flex-col lg:flex-row gap-[50px] lg:gap-[50px] xl:gap-[206px] items-center justify-center">
+
+                <DescriptionPart />
+                <PresaleCard />
+            </div>
         </div >
     );
 }

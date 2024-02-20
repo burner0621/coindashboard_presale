@@ -165,13 +165,13 @@ const renderer = ({
         // Render a countdown
         return (
             <div className="flex flex-row justify-between">
-                <CountItem title="DAYS" value={days}></CountItem>
+                <CountItem title="DAYS" value={`${days>=10?days.toString():'0' + days.toString()}`}></CountItem>
                 <div className="flex flex-row items-center text-[32px] font-normal leading-[38.73px]">:</div>
-                <CountItem title="HRS" value={hours}></CountItem>
+                <CountItem title="HRS" value={`${hours>=10?hours.toString():'0' + hours.toString()}`}></CountItem>
                 <div className="flex flex-row items-center text-[32px] font-normal leading-[38.73px]">:</div>
-                <CountItem title="MIN" value={minutes}></CountItem>
+                <CountItem title="MIN" value={`${minutes>=10?minutes.toString():'0' + minutes.toString()}`}></CountItem>
                 <div className="flex flex-row items-center text-[32px] font-normal leading-[38.73px]">:</div>
-                <CountItem title="SEC" value={seconds}></CountItem>
+                <CountItem title="SEC" value={`${seconds>=10?seconds.toString():'0' + seconds.toString()}`}></CountItem>
             </div>
         );
     }

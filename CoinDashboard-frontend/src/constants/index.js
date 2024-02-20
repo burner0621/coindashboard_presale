@@ -10,10 +10,10 @@ export const TOKEN_PUBKEY = new PublicKey(
 
 export const PRESALE_SEED = "CLUB_PRESALE_SEED";
 export const USER_SEED = "CLUB_USER_SEED";
-export const PRESALE_ID = 2;
+export const PRESALE_ID = 4;
 
 export const PRESALE_AUTHORITY = new PublicKey(
-  "B7AM6s1cEukJsNmDdtN1FTTqLYLpr1BokBUfJiHVWArk"
+  "dsz6dAzV49wAMx8Rg4Zb98QPPCPXbPFAwpa2TwmDM16"
 );
 
 export const TOKEN_PRESALE_HARDCAP = 10000000; // token

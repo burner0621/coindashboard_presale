@@ -32,7 +32,7 @@ function App() {
     { ft: "USDT", icon: USDT },
   ];
   return (
-    <div className="App bg-[#071619]" style={{ backgroundImage: "url('/assets/img/pattern.png')"}}>
+    <div className="App bg-[#071619] bg-center bg-cover" style={{ backgroundImage: "url('/assets/img/pattern.png')"}}>
       <ThemeContext.Provider value={tokens}>
         <WalletConnectProvider>
           <Navbar></Navbar>

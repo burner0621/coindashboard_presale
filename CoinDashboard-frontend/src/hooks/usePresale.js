@@ -43,8 +43,9 @@ import {
     const [startTime, setStartTime] = useState(0);
     const [endTime, setEndTime] = useState(0);
     const [buyAmount, setBuyAmount] = useState(0);
+    const [claimedAmount, setClaimedAmount] = useState(0);
     const [totalBuyAmount, setTotalBuyAmount] = useState(0);
-  
+
     const program = useMemo(() => {
       if (anchorWallet) {
         const provider = new anchor.AnchorProvider(
@@ -57,7 +58,6 @@ import {
     }, [connection, anchorWallet]);
   
     useEffect(() => {
-      console.log("usePresale useEffect log - 1 : ", program, transactionPending);
   
       const getPresaleInfo = async () => {
         if (program && !transactionPending) {
@@ -99,6 +99,7 @@ import {
             );
             const info = await program.account.userInfo.fetch(userInfo);
             setBuyAmount(info.buyTokenAmount);
+            setClaimedAmount(info.claimAmount);
             console.log("User Info : ", info);
           } catch (error) {
             console.log(error);
@@ -248,7 +249,7 @@ import {
               new anchor.BN(10 ** TOKEN_DECIMAL), //softcapAmount
               new anchor.BN(bigIntHardcap), // hardcapAmount
               new anchor.BN(new Date("2024-02-18T17:12:00Z").getTime() / 1000), // start time
-              new anchor.BN(new Date("2024-02-28T19:00:00Z").getTime() / 1000), // end time
+              new anchor.BN(new Date("2024-02-19T19:00:00Z").getTime() / 1000), // end time
               PRESALE_ID // presale id
             )
             .accounts({
@@ -258,44 +259,6 @@ import {
             })
             .rpc();
           toast.success("Successfully updated presale.");
-          return false;
-        } catch (error) {
-          console.log(error);
-          toast.error(error.toString());
-          return false;
-        } finally {
-          setTransactionPending(false);
-        }
-      }
-    };
-  
-    const updateAuth = async () => {
-      if (program && publicKey) {
-        try {
-          setTransactionPending(true);
-          const [presale_info, presale_bump] = findProgramAddressSync(
-            [
-              utf8.encode(PRESALE_SEED),
-              PRESALE_AUTHORITY.toBuffer(),
-              new Uint8Array([PRESALE_ID]),
-            ],
-            program.programId
-          );
-  
-          const tx = await program.methods
-            .updateAuth(
-              PRESALE_ID // presale id
-            )
-            .accounts({
-              presaleInfo: presale_info,
-              newAuth: new PublicKey(
-                "61N9pcSLe97igPTUvwyDXhcEJpRwjPH89ARfiWPN2gdu"
-              ),
-              authority: publicKey,
-              systemProgram: SystemProgram.programId,
-            })
-            .rpc();
-          toast.success("Successfully initialized user.");
           return false;
         } catch (error) {
           console.log(error);
@@ -499,7 +462,7 @@ import {
       }
     };
   
-    const withdrawToken = async () => {
+    const withdrawToken = async (withdrawnToken) => {
       if (program && publicKey) {
         try {
           setTransactionPending(true);
@@ -523,13 +486,13 @@ import {
   
           const buyer_presale_token_associated_token_account =
             await anchor.utils.token.associatedAddress({
-              mint: TOKEN_PUBKEY,
+              mint: withdrawnToken,
               owner: publicKey,
             });
   
           const presale_presale_token_associated_token_account =
             await anchor.utils.token.associatedAddress({
-              mint: TOKEN_PUBKEY,
+              mint: withdrawnToken,
               owner: presaleInfo,
             });
   
@@ -538,11 +501,10 @@ import {
   
           const tx = await program.methods
             .withdrawToken(
-              new anchor.BN(bigIntWithdrawAmount.toString()),
               PRESALE_ID
             )
             .accounts({
-              presaleTokenMintAccount: TOKEN_PUBKEY,
+              presaleTokenMintAccount: withdrawnToken,
               buyerPresaleTokenAssociatedTokenAccount:
                 buyer_presale_token_associated_token_account,
               presalePresaleTokenAssociatedTokenAccount:
@@ -578,10 +540,10 @@ import {
       getPrice,
       withdrawSol,
       withdrawToken,
-      updateAuth,
       startTime,
       endTime,
       buyAmount,
+      claimedAmount,
       totalBuyAmount,
       transactionPending,
     };
