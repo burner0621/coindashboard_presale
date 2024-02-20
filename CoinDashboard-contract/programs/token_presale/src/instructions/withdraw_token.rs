@@ -12,17 +12,32 @@ use crate::errors::PresaleError;
 
 pub fn withdraw_token(
     ctx: Context<WithdrawToken>, 
-    amount: u64,
     identifier: u8
 ) -> Result<()> {
     let presale_info = &mut ctx.accounts.presale_info;
+    let withdrawnToken = ctx.accounts.presale_token_mint_account.key();
     let bump = &[presale_info.bump];
 
-    if presale_info.deposit_token_amount < amount {
-        return Err(PresaleError::InsufficientFund.into());
+    let cur_timestamp = u64::try_from(Clock::get()?.unix_timestamp).unwrap();;
+    if presale_info.end_time > cur_timestamp {
+        msg!("Presale not ended yet.");
+        return Err(PresaleError::PresaleNotEnded.into());
     }
 
-    presale_info.deposit_token_amount = presale_info.deposit_token_amount - amount;
+    let mut amount = 0;
+    if withdrawnToken == presale_info.usdt_token_mint_address {
+        amount = presale_info.deposit_usdt_token_amount;
+        presale_info.deposit_usdt_token_amount = 0;
+    } else if withdrawnToken == presale_info.usdc_token_mint_address {
+        amount = presale_info.deposit_usdc_token_amount;
+        presale_info.deposit_usdc_token_amount = 0;
+    } else if withdrawnToken == presale_info.jup_token_mint_address {
+        amount = presale_info.deposit_jup_token_amount;
+        presale_info.deposit_jup_token_amount = 0;
+    } else if withdrawnToken == presale_info.token_mint_address {
+        amount = presale_info.deposit_token_amount;
+        presale_info.deposit_token_amount = 0;
+    }
 
     msg!("Transferring presale tokens to buyer {}...", &ctx.accounts.buyer.key());
     msg!("Mint: {}", &ctx.accounts.presale_token_mint_account.to_account_info().key());   
@@ -49,7 +64,6 @@ pub fn withdraw_token(
 
 #[derive(Accounts)]
 #[instruction(
-    amount: u64,
     identifier: u8
 )]
 pub struct WithdrawToken<'info> {

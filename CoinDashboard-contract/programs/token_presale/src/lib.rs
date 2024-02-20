@@ -124,12 +124,10 @@ pub mod token_presale {
 
     pub fn withdraw_token(
         ctx: Context<WithdrawToken>,
-        amount: u64,
         identifier: u8
     ) -> Result<()> {
         return withdraw_token::withdraw_token(
             ctx,
-            amount,
             identifier
         );
     }

@@ -8,6 +8,7 @@ use {
 
 use crate::state::PresaleInfo;
 use crate::constants::PRESALE_SEED;
+use crate::errors::PresaleError;
 
 pub fn withdraw_sol(
     ctx: Context<WithdrawSol>, 
@@ -15,9 +16,19 @@ pub fn withdraw_sol(
 ) -> Result<()> {
 
     let presale_info = &mut ctx.accounts.presale_info;
+    
+    let cur_timestamp = u64::try_from(Clock::get()?.unix_timestamp).unwrap();;
+
+    // get time and compare with start and end time
+    if presale_info.end_time > cur_timestamp {
+        msg!("Presale not ended yet.");
+        return Err(PresaleError::PresaleNotEnded.into());
+    }
+    
     let bump = &[ctx.accounts.presale_info.bump];
 
-    let amount = **ctx.accounts.presale_info.to_account_info().try_borrow_mut_lamports()? - 1000000;
+
+    let amount = **ctx.accounts.presale_info.to_account_info().try_borrow_mut_lamports()?;
     **ctx.accounts.presale_info.to_account_info().try_borrow_mut_lamports()? -= amount;
     **ctx.accounts.buyer.try_borrow_mut_lamports()? += amount;
 

@@ -29,6 +29,7 @@ pub fn claim_token(
     let user_info = &mut ctx.accounts.user_info;
     let claim_amount = user_info.buy_token_amount - user_info.claim_amount;
     user_info.claim_amount = user_info.claim_amount + claim_amount;
+    presale_info.deposit_token_amount -= claim_amount;
 
     msg!("Transferring presale tokens to buyer {}...", &ctx.accounts.buyer.key());
     msg!("Mint: {}", &ctx.accounts.presale_token_mint_account.to_account_info().key());   
