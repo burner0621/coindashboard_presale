@@ -26,6 +26,7 @@ const PreReceiveInput = ({title, value, setValue, transactionPending}) => {
                     setBalance (Number(tokenDetails.amount) / 1000000)
                 }
             } catch (e) {
+                setBalance (0)
                 console.log (e)
             }
         }

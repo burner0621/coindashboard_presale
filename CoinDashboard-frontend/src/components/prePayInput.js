@@ -57,6 +57,7 @@ const PrePayInput = ({title, value, setValue, dropIndex, setDropIndex, balance, 
                     if (jupDetails.amount) setBalance (Number(jupDetails.amount) / 1000000)
                 }
             } catch (e) {
+                setBalance (0)
                 console.log (e)
             }
         }
