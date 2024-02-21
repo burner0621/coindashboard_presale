@@ -26,10 +26,14 @@ const DescriptionPart = () => {
                     </div>
                 </div>
             </div>
-            <button className="w-[166px] h-[36px] rounded-3xl px-4 py-2 border border-solid border-[#0cafcc] text-sm font-medium tracking-tight flex flex-row gap-1 items-center hover:bg-[#0cafcc] hover:text-white">
+            <a 
+                href="https://coindashboard.gitbook.io/coindashboard-documentation/" 
+                target="_blank"
+                className="w-[166px] h-[36px] rounded-3xl px-4 py-2 border border-solid border-[#0cafcc] text-sm font-medium tracking-tight flex flex-row gap-1 items-center hover:bg-[#0cafcc] hover:text-white"
+            >
                 <img src="/assets/img/document.svg"/>
                 Read WhitePaper
-            </button>
+            </a>
         </div>
     );
 }
