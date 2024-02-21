@@ -44,7 +44,7 @@ pub fn buy_token(
     let sol_price = pyth_price.agg.price as u64;
     msg!("sol token price {}...", sol_price);
 
-    let token_amount = quote_amount * sol_price / (presale_info.price_per_token) / 1000;
+    let token_amount = (quote_amount / 1000) * (sol_price / (presale_info.price_per_token)) ;
     msg!("buying token amount {}...", token_amount);
     msg!("sol token amount {}...", quote_amount);
 

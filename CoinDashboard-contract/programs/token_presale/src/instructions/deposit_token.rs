@@ -73,7 +73,7 @@ pub fn deposit_token(
         let jup_price = pyth_price.agg.price as u64;
         msg!("jupyter token price {}...", jup_price);
 
-        token_amount = amount * jup_price / (presale_info.price_per_token);
+        token_amount = amount * (jup_price / (presale_info.price_per_token));
         msg!("buying token amount {}...", token_amount);
         msg!("jupyter token amount {}...", amount);
     }
