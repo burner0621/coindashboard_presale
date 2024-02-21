@@ -27,14 +27,17 @@ const HowTo = () => {
                             <p className="mt-1 text-[12px] leading-[20px] font-medium">01.</p>
                             <p className="mt-[85px] text-[12px] leading-[20px] font-medium">02.</p>
                             <p className="mt-[64px] text-[12px] leading-[20px] font-medium">03.</p>
-                            <p className="mt-[100px] text-[12px] leading-[20px] font-medium">01.</p>
+                            <p className="mt-[100px] text-[12px] leading-[20px] font-medium">04.</p>
                         </div>
                         <Divider orientation="vertical" />
                     </div>
                     <div className="h-fit  flex flex-col gap-6 items-start">
                         <div className="flex flex-col gap-2 items-start">
                             <p className="text-xl leading-8 font-medium">Create a Wallet</p>
-                            <p className="text-sm leading-[21px] text-left">Download Phantom wallet from the app store or google play store. Desktop users, download phantom extension from <span className="text-[#06BDC5]">phantom.app</span></p>
+                            <p className="text-sm leading-[21px] text-left">Download Phantom wallet from the app store or google play store. Desktop users, download phantom extension from&nbsp;
+                                <a href="https://chrome.google.com/webstore/detail/phantom/bfnaelmomeimhlpmgjnjophhpkkoljpa" target="_blank">
+                                    <span className="text-[#06BDC5]">phantom.app</span></a>
+                            </p>
                         </div>
                         <div className="flex flex-col gap-2 items-start">
                             <p className="text-xl leading-8 font-medium">Get some SOL / USDT / USDC</p>

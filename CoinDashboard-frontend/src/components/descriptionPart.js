@@ -8,7 +8,7 @@ const DescriptionPart = () => {
         <div className="w-full lg:w-[500px] min-h-[404px] flex flex-col gap-6">
             <div className="flex flex-col gap-4">
                 <div className="text-[42px] md:text-[72px] leading-[79px] text-left">
-                    CoinDashboard Unveils<span className="text-[#6037FF]">$CDBD</span>
+                    CoinDashboard Unveils<span className="text-[#0cafcc]">$CDBD</span>
                 </div>
                 <div className="text-[#FFFFFFBF] text-left">Unlock unparalleled insights with $CDBD, the native token powering CoinDashboard's next evolution.</div>
                 <div className="flex flex-col gap-2.5">
@@ -26,7 +26,7 @@ const DescriptionPart = () => {
                     </div>
                 </div>
             </div>
-            <button className="w-[166px] h-[36px] rounded-3xl px-4 py-2 border border-solid border-[#3555FF] text-sm font-medium tracking-tight flex flex-row gap-1 items-center">
+            <button className="w-[166px] h-[36px] rounded-3xl px-4 py-2 border border-solid border-[#0cafcc] text-sm font-medium tracking-tight flex flex-row gap-1 items-center hover:bg-[#0cafcc] hover:text-white">
                 <img src="/assets/img/document.svg"/>
                 Read WhitePaper
             </button>

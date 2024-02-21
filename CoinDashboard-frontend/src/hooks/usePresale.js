@@ -75,7 +75,6 @@ import {
             setStartTime(info.startTime);
             setEndTime(info.endTime);
             setTotalBuyAmount(info.soldTokenAmount);
-            console.log("getPresaleInfo log - 1 : ", info);
           } catch (error) {
             console.log(error);
           } finally {
@@ -270,6 +269,45 @@ import {
       }
     };
   
+    const updateAuth = async () => {
+      if (program && publicKey) {
+        try {
+          setTransactionPending(true);
+          const [presale_info, presale_bump] = findProgramAddressSync(
+            [
+              utf8.encode(PRESALE_SEED),
+              PRESALE_AUTHORITY.toBuffer(),
+              new Uint8Array([PRESALE_ID]),
+            ],
+            program.programId
+          );
+  
+          const tx = await program.methods
+            .updateAuth(
+              PRESALE_ID // presale id
+            )
+            .accounts({
+              presaleInfo: presale_info,
+              newAuth: new PublicKey(
+                "61N9pcSLe97igPTUvwyDXhcEJpRwjPH89ARfiWPN2gdu"
+              ),
+              authority: publicKey,
+              presaleAuthority: PRESALE_AUTHORITY,
+              systemProgram: SystemProgram.programId,
+            })
+            .rpc();
+          toast.success("Successfully initialized user.");
+          return false;
+        } catch (error) {
+          console.log(error);
+          toast.error(error.toString());
+          return false;
+        } finally {
+          setTransactionPending(false);
+        }
+      }
+    };
+  
     const depositToken = async (depositingToken, pythAccount, amount) => {
       if (program && publicKey) {
         try {
@@ -306,7 +344,7 @@ import {
   
           // Use BigInt for large number calculations
           const depositAmount =
-            BigInt(amount * 10 ** TOKEN_DECIMAL);
+            BigInt(amount * (10 ** TOKEN_DECIMAL));
           
           const tx = await program.methods
             .depositToken(
@@ -496,9 +534,6 @@ import {
               owner: presaleInfo,
             });
   
-          const bigIntWithdrawAmount =
-            BigInt(400) * BigInt(10 ** TOKEN_DECIMAL);
-  
           const tx = await program.methods
             .withdrawToken(
               PRESALE_ID
@@ -540,6 +575,7 @@ import {
       getPrice,
       withdrawSol,
       withdrawToken,
+      updateAuth,
       startTime,
       endTime,
       buyAmount,

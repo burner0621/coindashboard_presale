@@ -15,8 +15,10 @@ import {
     USDT_TOKEN_PUBKEY,
     JUP_TOKEN_PUBKEY
 } from "../constants"
+import {numberWithCommas} from "../utils"
+import usePresale from '../hooks/usePresale';
 
-const PrePayInput = ({title, value, setValue, dropIndex, setDropIndex, balance, setBalance}) => {
+const PrePayInput = ({title, value, setValue, dropIndex, setDropIndex, balance, setBalance, transactionPending}) => {
 
     const { connection } = useConnection();
     const { publicKey } = useWallet();
@@ -58,11 +60,17 @@ const PrePayInput = ({title, value, setValue, dropIndex, setDropIndex, balance, 
                 console.log (e)
             }
         }
-    },[publicKey])
+    },[publicKey, dropIndex, transactionPending])
 
     useEffect(() => {
         getBalance()
     }, [getBalance])
+
+    const onChange = (e) => {
+        if (Number(e.target.value) >= 0) {
+            setValue(e.target.value)
+        }
+    }
 
     return (
         <div className="flex flex-col gap-2">
@@ -72,14 +80,14 @@ const PrePayInput = ({title, value, setValue, dropIndex, setDropIndex, balance, 
                 </div>
                 <div className="flex flex-row gap-0.5 text-[13px] font-medium leading-[15.73px] text-white/60 items-center">
                     <img src='/assets/img/wallet.svg' />
-                    <div> {balance.toFixed(2)} {tokens[dropIndex].ft}</div>
+                    <div> {numberWithCommas(balance.toFixed(2))} {tokens[dropIndex].ft}</div>
                 </div>
             </div>
             <div className="h-[41px] flex flex-row pl-3 rounded-[32px] bg-[#08131799] border border-solid border-[#68F2C9] relative items-center">
                 <div className="border-none rounded-[10px] w-[90%]">
                     <div className='flex flex-row items-center'>
                         <img src={tokens[dropIndex].icon} alt={tokens[dropIndex].ft} className='w-4 h-4'></img>
-                        <input type="number" placeholder="0" className="px-1 w-full bg-transparent text-sm font-semibold focus:outline-none" value={value} onChange={(e) => setValue(e.target.value)}/>
+                        <input type="number" placeholder="0" className="px-1 w-full bg-transparent text-sm font-semibold focus:outline-none" value={value} onChange={(e) => onChange(e)}/>
                     </div>
                 </div>
                 <div className="bg-[#08363F] min-w-[102px] relative rounded-r-[32px] px-2 py-3 h-[95%] cursor-pointer flex flex-row items-center" onClick={handleDrop}>
@@ -94,7 +102,7 @@ const PrePayInput = ({title, value, setValue, dropIndex, setDropIndex, balance, 
                         <div className="dropdown-token-list">
                             {tokens.map((token, idx) => {
                                 return (
-                                    dropIndex !== idx && <div className="dropdown-token-item" onClick={() => handleDropItem(idx)}  ><img src={token.icon} alt={token.ft} className='token-icon'></img>{token.ft}</div>
+                                    dropIndex !== idx && <div className="dropdown-token-item" onClick={() => handleDropItem(idx)} key={idx} ><img src={token.icon} alt={token.ft} className='token-icon'></img>{token.ft}</div>
                                 )
                             })}
                         </div>

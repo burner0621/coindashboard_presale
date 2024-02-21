@@ -12,30 +12,11 @@ import {
 import usePresale from "../hooks/usePresale.js"
 import { Icon, IconType } from "../components/icons";
 import { Divider } from "@mui/material"
+import {numberWithCommas} from "../utils"
 
 const Claim = () => {
 
     const { claimToken, transactionPending, buyAmount, claimedAmount } = usePresale();
-
-    const { connection } = useConnection();
-    const { publicKey } = useWallet();
-    const [balance, setBalance] = useState (0)
-
-    const getBalance = useCallback(async() => {
-        if (publicKey && connection) {
-            try{
-                const tokenAddress = await splToken.getAssociatedTokenAddress(TOKEN_PUBKEY, publicKey)
-                const tokenDetails = await splToken.getAccount(connection, tokenAddress)
-                if (tokenDetails.amount) setBalance (Number(tokenDetails.amount) / 1000000)
-            } catch (e) {
-                console.log (e)
-            }
-        }
-    }, [publicKey])
-
-    useEffect(() => {
-        getBalance()
-    }, [getBalance])
 
     return (
         <div className="w-full flex flex-col items-center gap-6">
@@ -51,7 +32,7 @@ const Claim = () => {
                     <Divider />
                     <div className="h-[34px] flex flex-row gap-2 items-center justify-center">
                         <img src="/assets/icon/ic_cdbd.svg" width={'34px'} />
-                        <div className="text-2xl">{Number((buyAmount - claimedAmount)/(10 ** TOKEN_DECIMAL)).toFixed(2)}</div>
+                        <div className="text-2xl">{numberWithCommas(Number((buyAmount - claimedAmount)/(10 ** TOKEN_DECIMAL)).toFixed(2))}</div>
                     </div>
                 </div>
                 {transactionPending ? 

@@ -1,7 +1,13 @@
 import React, { useState, useContext, useEffect, useCallback } from "react";
+import {
+    useWallet,
+  } from "@solana/wallet-adapter-react";
 import PrePayInput from "./prePayInput"
 import PreReceiveInput from "./preReceiveInput"
+import Stats from "../components/stats.js"
 import { Icon, IconType } from "./icons";
+
+import { toast } from "react-toastify";
 
 import "./components.scss"
 import CountItem from "./countItem"
@@ -22,6 +28,7 @@ const PresaleCard = () => {
 
     const { buyToken, depositToken, transactionPending, startTime, endTime, getPrice } = usePresale();
     const tokens = useContext(ThemeContext);
+    const { publicKey } = useWallet();
 
     const [quoteAmount, setQuoteAmount] = useState(0);
     const [tokenAmount, setTokenAmount] = useState(0);
@@ -43,7 +50,7 @@ const PresaleCard = () => {
         const price = await getPrice(tokens[dropIndex].ft)
         if (price) setRatio(parseInt(Number(price) / PRICE_PER_TOKEN))
         else setRatio(0)
-    }, [dropIndex])
+    }, [dropIndex, publicKey])
 
     useEffect(() => {
         _setRatio()
@@ -51,7 +58,7 @@ const PresaleCard = () => {
 
     useEffect(() => {
         setTokenAmount(quoteAmount * ratio)
-    }, [quoteAmount])
+    }, [quoteAmount, ratio])
 
     // useEffect(() => {
     //     setQuoteAmount(tokenAmount / ratio)
@@ -75,8 +82,8 @@ const PresaleCard = () => {
     };
 
     return (
-        <div className="w-full md:w-[407px] h-[430px] rounded-3xl p-6 border border-solid border-[#68F2C9] flex flex-col gap-5">
-            <div className="w-full md:w-[359px] h-[326px] flex flex-col gap-4">
+        <div className="w-full md:w-[407px] rounded-3xl p-6 border border-solid border-[#68F2C9] flex flex-col gap-5">
+            <div className="w-full md:w-[359px] flex flex-col gap-4">
                 <div className="text-[14px] leading-[17px] tracking-wide uppercase text-left">
                     {Date.now() < startTime * 1000 && "Pre-Sale Starts In"}
                     {Date.now() >= startTime * 1000 && Date.now() < endTime * 1000 && "Pre-Sale Ends In"}
@@ -97,6 +104,8 @@ const PresaleCard = () => {
                     Please connect your wallet.
                 </span> 
                 }
+                <div className="w-full h-0 border-[0.5px] border-[#587267]" />
+                <Stats />
                 <div className="w-full h-0 border border-[#587267]" />
                 <PrePayInput
                     title="Amount you pay"
@@ -106,8 +115,14 @@ const PresaleCard = () => {
                     setDropIndex={(val) => setDropIndex(val)}
                     balance={balance}
                     setBalance={(val) => setBalance(val)}
+                    transactionPending={transactionPending}
                 />
-                <PreReceiveInput title="Amount you receive" value={tokenAmount} setValue={(val) => setTokenAmount(val)} />
+                <PreReceiveInput 
+                    title="Amount you receive"
+                    value={tokenAmount}
+                    setValue={(val) => setTokenAmount(val)}
+                    transactionPending={transactionPending}
+                />
                 <div className="flex flex-col gap-2.5">
                     <div className="w-full h-0 border border-[#587267]" />
                     <div className="flex flex-row items-center justify-center gap-2 text-[14px] font-normal leading-[16.94px]">
@@ -136,7 +151,7 @@ const PresaleCard = () => {
             )}
             {(canBuy && transactionPending) && 
                 <div className="flex flex-row items-center justify-center">
-                    <Icon type={IconType.LOADING} className="w-14 h-14" />
+                    <Icon type={IconType.LOADING} className="w-9 h-9" />
                 </div>
             }
             {!canBuy && (

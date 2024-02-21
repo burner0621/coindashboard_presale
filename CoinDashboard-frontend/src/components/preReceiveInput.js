@@ -8,8 +8,10 @@ import * as splToken from "@solana/spl-token";
 import {
     TOKEN_PUBKEY,
 } from "../constants"
+import {numberWithCommas} from "../utils"
+import usePresale from "../hooks/usePresale.js";
 
-const PreReceiveInput = ({title, value, setValue}) => {
+const PreReceiveInput = ({title, value, setValue, transactionPending}) => {
 
     const { connection } = useConnection();
     const { publicKey } = useWallet();
@@ -20,12 +22,14 @@ const PreReceiveInput = ({title, value, setValue}) => {
             try{
                 const tokenAddress = await splToken.getAssociatedTokenAddress(TOKEN_PUBKEY, publicKey)
                 const tokenDetails = await splToken.getAccount(connection, tokenAddress)
-                if (tokenDetails.amount) setBalance (Number(tokenDetails.amount) / 1000000)
+                if (tokenDetails.amount) {
+                    setBalance (Number(tokenDetails.amount) / 1000000)
+                }
             } catch (e) {
                 console.log (e)
             }
         }
-    }, [publicKey])
+    }, [publicKey, transactionPending])
 
     useEffect(() => {
         getBalance()
@@ -39,7 +43,7 @@ const PreReceiveInput = ({title, value, setValue}) => {
                 </div>
                 <div className="flex flex-row gap-0.5 text-[13px] font-medium leading-[15.73px] text-white/60 items-center">
                     <img src='/assets/img/wallet.svg' />
-                    <div> {balance.toFixed(2)} CDBD</div>
+                    <div> {numberWithCommas(balance.toFixed(2))} CDBD</div>
                 </div>
             </div>
             <div className="h-[41px] flex flex-row pl-3 rounded-[32px] bg-[#08131799] border border-solid border-[#68F2C9] relative items-center">

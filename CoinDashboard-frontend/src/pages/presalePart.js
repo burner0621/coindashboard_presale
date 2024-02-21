@@ -9,7 +9,8 @@ import {
     USDT_TOKEN_PUBKEY,
     USDC_TOKEN_PUBKEY,
     JUP_TOKEN_PUBKEY,
-    JUP_PRICEFEED_ID
+    JUP_PRICEFEED_ID,
+    TOKEN_PRESALE_HARDCAP
 } from "../constants"
 
 import usePresale from "../hooks/usePresale";
@@ -27,7 +28,7 @@ const PresalePart = () => {
         claimToken,
         withdrawSol,
         withdrawToken,
-        buyToken
+        buyToken, updateAuth
     } = usePresale();
 
     const onCreatePresale = async () => {
@@ -46,6 +47,9 @@ const PresalePart = () => {
         await withdrawToken(withdrawingToken);
     };
 
+    const onUpdateAuth = async () => {
+        await updateAuth();
+    };
 
     const onUpdatePresale = async () => {
         await updatePresale();
@@ -78,7 +82,7 @@ const PresalePart = () => {
                     </button>
                     <button
                         className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
-                        onClick={() => onDepositToken(TOKEN_PUBKEY, JUP_PRICEFEED_ID, 10000000)}
+                        onClick={() => onDepositToken(TOKEN_PUBKEY, JUP_PRICEFEED_ID, TOKEN_PRESALE_HARDCAP)}
                     >
                         Deposit MintToken
                     </button>
@@ -141,6 +145,12 @@ const PresalePart = () => {
                         onClick={() => onWithdrawToken(JUP_TOKEN_PUBKEY)}
                     >
                         Withdraw JUPToken
+                    </button>
+                    <button
+                        className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
+                        onClick={() => onUpdateAuth()}
+                    >
+                        Update Auth
                     </button>
                 </div>
             }
