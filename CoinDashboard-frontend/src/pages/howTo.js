@@ -16,7 +16,7 @@ const HowTo = () => {
                 <p className="text-white/75">Deep dive into the key aspects of our supply, geared to enable growth, longevity and community.</p>
             </div>
             <div className="h-[490px] flex flex-row md:gap-[20px] lg:gap-[96px] justify-center">
-                <div className="hidden md:flex flex-col items-center">
+                <div className="hidden md:flex flex-row items-center">
                     <div className="md:w-[240px] md:h-[240px] lg:w-[360px] lg:h-[360px]">
                         <img src="/assets/icon/ic_backforward.svg" />
                     </div>
@@ -26,8 +26,8 @@ const HowTo = () => {
                         <div className="flex flex-col gap-6 items-start">
                             <p className="mt-1 text-[12px] leading-[20px] font-medium">01.</p>
                             <p className="mt-[85px] text-[12px] leading-[20px] font-medium">02.</p>
-                            <p className="mt-[64px] text-[12px] leading-[20px] font-medium">03.</p>
-                            <p className="mt-[100px] text-[12px] leading-[20px] font-medium">04.</p>
+                            <p className="mt-[62px] text-[12px] leading-[20px] font-medium">03.</p>
+                            <p className="mt-[135px] text-[12px] leading-[20px] font-medium">04.</p>
                         </div>
                         <Divider orientation="vertical" />
                     </div>
@@ -44,7 +44,7 @@ const HowTo = () => {
                             <p className="text-sm leading-[21px] text-left">Have some SOL, USDT, USDC or JUP in your wallet to exchange for $CDBD</p>
                         </div>
                         <div className="flex flex-col gap-2 items-start">
-                            <p className="text-xl leading-8 font-medium cursor-pointer underline hover:text-blue-500"><a href="https://coindashboard.ai" target="_blank">Connect to CoinDashboard Website</a></p>
+                            <p className="text-xl text-left leading-8 font-medium">Connect to CoinDashboard presale Website</p>
                             <p className="text-sm leading-[21px] text-left">Enter the amount of $CDBD token you wish to purchase. Our platform will display the corresponding transaction details, including the current exchange rate and any associated fees.</p>
                         </div>
                         <div className="flex flex-col gap-2 items-start">

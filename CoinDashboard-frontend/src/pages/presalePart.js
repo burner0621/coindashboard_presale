@@ -28,7 +28,8 @@ const PresalePart = () => {
         claimToken,
         withdrawSol,
         withdrawToken,
-        buyToken, updateAuth
+        buyToken,
+        updateAuth
     } = usePresale();
 
     const onCreatePresale = async () => {
