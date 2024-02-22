@@ -41,10 +41,10 @@ const HowTo = () => {
                         </div>
                         <div className="flex flex-col gap-2 items-start">
                             <p className="text-xl leading-8 font-medium">Get some SOL / USDT / USDC</p>
-                            <p className="text-sm leading-[21px] text-left">Have some SOL, USDT, USDC or JUP in your wall to exchange for $CDBD</p>
+                            <p className="text-sm leading-[21px] text-left">Have some SOL, USDT, USDC or JUP in your wallet to exchange for $CDBD</p>
                         </div>
                         <div className="flex flex-col gap-2 items-start">
-                            <p className="text-xl leading-8 font-medium">Connect to CoinDashboard Website</p>
+                            <p className="text-xl leading-8 font-medium cursor-pointer underline hover:text-blue-500"><a href="https://coindashboard.ai" target="_blank">Connect to CoinDashboard Website</a></p>
                             <p className="text-sm leading-[21px] text-left">Enter the amount of $CDBD token you wish to purchase. Our platform will display the corresponding transaction details, including the current exchange rate and any associated fees.</p>
                         </div>
                         <div className="flex flex-col gap-2 items-start">
