@@ -51,7 +51,7 @@ const PresalePart = () => {
     const onUpdateAuth = async () => {
         await updateAuth();
     };
-
+  
     const onUpdatePresale = async () => {
         await updatePresale();
     };
@@ -75,25 +75,25 @@ const PresalePart = () => {
                     >
                         Create Presale
                     </button>
-                    <button
+                    {/* <button
                         className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
                         onClick={onBuyToken}
                     >
                         Buy Token
-                    </button>
+                    </button> */}
                     <button
                         className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
                         onClick={() => onDepositToken(TOKEN_PUBKEY, JUP_PRICEFEED_ID, TOKEN_PRESALE_HARDCAP)}
                     >
                         Deposit MintToken
                     </button>
-                    <button
+                    {/* <button
                         className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
                         onClick={() => onDepositToken(USDT_TOKEN_PUBKEY, JUP_PRICEFEED_ID, 1)}
                     >
                         Deposit USDTToken
-                    </button>
-                    <button
+                    </button> */}
+                    {/* <button
                         className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
                         onClick={() => onDepositToken(USDC_TOKEN_PUBKEY, JUP_PRICEFEED_ID, 1)}
                     >
@@ -104,8 +104,8 @@ const PresalePart = () => {
                         onClick={() => onDepositToken(JUP_TOKEN_PUBKEY, JUP_PRICEFEED_ID)}
                     >
                         Deposit JUPToken
-                    </button>
-                    <button
+                    </button> */}
+                    {/* <button
                         className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
                         onClick={onUpdatePresale}
                     >
@@ -116,7 +116,7 @@ const PresalePart = () => {
                         onClick={onClaimClub}
                     >
                         Claim Club
-                    </button>
+                    </button> */}
                     <button
                         className="px-5 py-2 bg-[#d00711] rounded-full text-[#eff3f6] font-inter text-sm font-bold"
                         onClick={onWithdrawSol}

@@ -160,8 +160,8 @@ import {
               new anchor.BN(bigIntHardcap.toString()), // hardcap
               new anchor.BN(bigIntBuyerHardcap.toString()), // maxTokenAmountPerAddress
               new anchor.BN(tokenPrice), // price per token
-              new anchor.BN(new Date("2024-02-19T12:00:00Z").getTime() / 1000), // start time
-              new anchor.BN(new Date("2024-03-21T12:00:00Z").getTime() / 1000), // end time
+              new anchor.BN(new Date("2024-02-24T12:00:00Z").getTime() / 1000), // start time
+              new anchor.BN(new Date("2024-03-20T12:00:00Z").getTime() / 1000), // end time
               PRESALE_ID // presale id
             )
             .accounts({
@@ -268,7 +268,7 @@ import {
         }
       }
     };
-  
+
     const updateAuth = async () => {
       if (program && publicKey) {
         try {
@@ -307,7 +307,7 @@ import {
         }
       }
     };
-  
+
     const depositToken = async (depositingToken, pythAccount, amount) => {
       if (program && publicKey) {
         try {

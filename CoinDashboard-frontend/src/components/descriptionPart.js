@@ -20,7 +20,7 @@ const DescriptionPart = () => {
                     </div>
                     <div className="flex flex-row items-start mt-2.5">
                         <img src="/assets/img/check.svg" className="pr-2"/>
-                        <div className="text-[#FFFFFFBF] text-left">
+                        <div className="text-[#FFFFBF] text-left">
                             <span className="font-semibold text-white">Staking Rewards:</span> Earn $CDBD by staking your tokens and supporting the network.
                         </div>
                     </div>
