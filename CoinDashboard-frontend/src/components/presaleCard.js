@@ -125,13 +125,13 @@ const PresaleCard = () => {
                 />
                 <div className="flex flex-col mt-4">
                     <div className="w-full h-0 border border-[#587267]" />
-                    <div className="flex flex-row items-center justify-centertext-[14px] font-normal leading-[16.94px] mt-2.5">
-                        <div className="flex flex-row items-center gap-1">
+                    <div className="flex flex-row items-center justify-center text-[14px] font-normal leading-[16.94px] mt-2.5">
+                        <div className="flex flex-row items-center gap-1 mr-2">
                             <img src='/assets/icon/ic_cdbd.svg' />
                             <span>{ratio} CDBD</span>
                         </div>
                         =
-                        <div className="flex flex-row items-center gap-1 mt-2">
+                        <div className="flex flex-row items-center gap-1 ml-2">
                             {tokens[dropIndex].ft === "SOL" && <img src='/assets/img/sol.svg' className="w-5 h-5" />}
                             {tokens[dropIndex].ft === "USDT" && <img src='/assets/img/usdt.png' className="w-5 h-5" />}
                             {tokens[dropIndex].ft === "USDC" && <img src='/assets/img/usdc.svg' className="w-5 h-5" />}
