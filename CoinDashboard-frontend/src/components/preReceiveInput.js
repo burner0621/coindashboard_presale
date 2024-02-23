@@ -37,17 +37,17 @@ const PreReceiveInput = ({title, value, setValue, transactionPending}) => {
     }, [getBalance])
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col mt-4">
             <div className="flex flex-row justify-between items-center">
                 <div className="text-[14px] font-normal leading-[16.94px]">
                     {title}:
                 </div>
-                <div className="flex flex-row gap-0.5 text-[13px] font-medium leading-[15.73px] text-white/60 items-center">
-                    <img src='/assets/img/wallet.svg' />
+                <div className="flex flex-row text-[13px] font-medium leading-[15.73px] text-white/60 items-center">
+                    <img src='/assets/img/wallet.svg' className="ml-0.5"/>
                     <div> {numberWithCommas(balance.toFixed(2))} CDBD</div>
                 </div>
             </div>
-            <div className="h-[41px] flex flex-row pl-3 rounded-[32px] bg-[#08131799] border border-solid border-[#68F2C9] relative items-center">
+            <div className="h-[41px] flex flex-row pl-3 rounded-[32px] mt-2 bg-[#08131799] border border-solid border-[#68F2C9] relative items-center">
                 <img src='/assets/icon/ic_cdbd.svg' />
                 <div className="presale-pay-input-tag">
                     <input 

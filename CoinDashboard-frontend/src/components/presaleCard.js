@@ -82,8 +82,8 @@ const PresaleCard = () => {
     };
 
     return (
-        <div className="w-full md:w-[407px] rounded-3xl p-6 border border-solid border-[#68F2C9] flex flex-col gap-5">
-            <div className="w-full md:w-[359px] flex flex-col gap-4">
+        <div className="w-full md:w-[407px] rounded-3xl p-6 border border-solid border-[#68F2C9] flex flex-col mt-[50px] lg:ml-[50px] xl:ml-[206px]">
+            <div className="w-full md:w-[359px] flex flex-col">
                 <div className="text-[14px] leading-[17px] tracking-wide uppercase text-left">
                     {Date.now() < startTime * 1000 && "Pre-Sale Starts In"}
                     {Date.now() >= startTime * 1000 && Date.now() < endTime * 1000 && "Pre-Sale Ends In"}
@@ -104,9 +104,9 @@ const PresaleCard = () => {
                     Please connect your wallet.
                 </span> 
                 }
-                <div className="w-full h-0 border-[0.5px] border-[#587267]" />
+                <div className="w-full h-0 border-[0.5px] border-[#587267] mt-4" />
                 <Stats />
-                <div className="w-full h-0 border border-[#587267]" />
+                <div className="w-full h-0 border border-[#587267] mt-4" />
                 <PrePayInput
                     title="Amount you pay"
                     value={quoteAmount}
@@ -123,15 +123,15 @@ const PresaleCard = () => {
                     setValue={(val) => setTokenAmount(val)}
                     transactionPending={transactionPending}
                 />
-                <div className="flex flex-col gap-2.5">
+                <div className="flex flex-col mt-4">
                     <div className="w-full h-0 border border-[#587267]" />
-                    <div className="flex flex-row items-center justify-center gap-2 text-[14px] font-normal leading-[16.94px]">
+                    <div className="flex flex-row items-center justify-centertext-[14px] font-normal leading-[16.94px] mt-2.5">
                         <div className="flex flex-row items-center gap-1">
                             <img src='/assets/icon/ic_cdbd.svg' />
                             <span>{ratio} CDBD</span>
                         </div>
                         =
-                        <div className="flex flex-row items-center gap-1">
+                        <div className="flex flex-row items-center gap-1 mt-2">
                             {tokens[dropIndex].ft === "SOL" && <img src='/assets/img/sol.svg' className="w-5 h-5" />}
                             {tokens[dropIndex].ft === "USDT" && <img src='/assets/img/usdt.png' className="w-5 h-5" />}
                             {tokens[dropIndex].ft === "USDC" && <img src='/assets/img/usdc.svg' className="w-5 h-5" />}
@@ -143,20 +143,20 @@ const PresaleCard = () => {
             </div>
             {(canBuy && !transactionPending) && (
                 <button
-                    className="w-full h-9 flex flex-row items-center justify-center rounded-3xl px-4 py-2 text-[14px] bg-cyan-500"
+                    className="w-full h-9 flex flex-row items-center justify-center rounded-3xl px-4 py-2 text-[14px] bg-cyan-500 mt-5"
                     onClick={onBuyToken}
                 >
                     Buy Now
                 </button>
             )}
             {(canBuy && transactionPending) && 
-                <div className="flex flex-row items-center justify-center">
+                <div className="flex flex-row items-center justify-center mt-5">
                     <Icon type={IconType.LOADING} className="w-9 h-9" />
                 </div>
             }
             {!canBuy && (
                 <button
-                    className="w-full h-9 flex flex-row items-center justify-center rounded-3xl px-4 py-2 text-[14px] bg-cyan-500"
+                    className="w-full h-9 flex flex-row items-center justify-center rounded-3xl px-4 py-2 text-[14px] bg-cyan-500 mt-5"
                     disabled
                 >
                     Buy Now
@@ -179,7 +179,7 @@ const renderer = ({
     } else {
         // Render a countdown
         return (
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between mt-4">
                 <CountItem title="DAYS" value={`${days>=10?days.toString():'0' + days.toString()}`}></CountItem>
                 <div className="flex flex-row items-center text-[32px] font-normal leading-[38.73px]">:</div>
                 <CountItem title="HRS" value={`${hours>=10?hours.toString():'0' + hours.toString()}`}></CountItem>

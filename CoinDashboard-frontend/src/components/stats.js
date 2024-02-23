@@ -103,7 +103,7 @@ const Stats = () => {
     }, [publicKey])
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col mt-4">
             <div>Raised <span className="text-[#65f0ca]">{totalBuyAmount ? numberWithCommas(Number(totalBuyAmount / 1000000)) : 0}</span> of {numberWithCommas(TOKEN_PRESALE_HARDCAP)} CDBD</div>
             <PrettoSlider aria-label="Volume" value={Number(totalBuyAmount) / 100000 / 1000000} />
         </div>

@@ -155,8 +155,7 @@ const PresalePart = () => {
                     </button>
                 </div>
             }
-            <div className="px-4 flex flex-col lg:flex-row gap-[50px] lg:gap-[50px] xl:gap-[206px] items-center justify-center">
-
+            <div className="px-4 flex flex-col lg:flex-row items-center justify-center">
                 <DescriptionPart />
                 <PresaleCard />
             </div>

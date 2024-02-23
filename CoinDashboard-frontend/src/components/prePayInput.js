@@ -74,17 +74,17 @@ const PrePayInput = ({title, value, setValue, dropIndex, setDropIndex, balance, 
     }
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col mt-4">
             <div className="flex flex-row justify-between items-center">
                 <div className="text-[14px] leading-[16.94px]">
                     {title}:
                 </div>
-                <div className="flex flex-row gap-0.5 text-[13px] font-medium leading-[15.73px] text-white/60 items-center">
-                    <img src='/assets/img/wallet.svg' />
+                <div className="flex flex-row text-[13px] font-medium leading-[15.73px] text-white/60 items-center">
+                    <img src='/assets/img/wallet.svg' className='ml-0.5' />
                     <div> {numberWithCommas(balance.toFixed(2))} {tokens[dropIndex].ft}</div>
                 </div>
             </div>
-            <div className="h-[41px] flex flex-row pl-3 rounded-[32px] bg-[#08131799] border border-solid border-[#68F2C9] relative items-center">
+            <div className="h-[41px] flex flex-row pl-3 rounded-[32px] bg-[#08131799] border border-solid border-[#68F2C9] relative items-center mt-2">
                 <div className="border-none rounded-[10px] w-[90%]">
                     <div className='flex flex-row items-center'>
                         <img src={tokens[dropIndex].icon} alt={tokens[dropIndex].ft} className='w-4 h-4'></img>

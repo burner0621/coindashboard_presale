@@ -36,13 +36,13 @@ function App() {
       <ThemeContext.Provider value={tokens}>
         <WalletConnectProvider>
           <Navbar></Navbar>
-          <div className='px-5 md:px-10 lg:px-0 pt-6 md:pt-[100px] pb-[160px] flex flex-col gap-[160px]'>
+          <div className='px-5 md:px-10 lg:px-0 pt-6 md:pt-[100px] pb-[160px] flex flex-col'>
             <PresalePart />
-            <Claim></Claim>
+            <Claim />
             <Dive />
           </div>
           <Price />
-          <div className='py-[142px] flex flex-col gap-[160px]'>
+          <div className='py-[142px] flex flex-col'>
             <Tokenomics />
             <HowTo />
           </div>

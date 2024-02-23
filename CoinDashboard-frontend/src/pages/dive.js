@@ -1,8 +1,8 @@
 const Dive = () => {
     return (
-        <div className="px-4 w-full flex flex-col gap-12">
+        <div className="px-4 w-full flex flex-col mt-[160px]">
             <div className="max-w-[731px] mx-auto flex flex-col gap-4">
-                <div className="mx-auto flex flex-col gap-2 items-center">
+                <div className="mx-auto flex flex-col items-center">
                     <div className=" w-max rounded-3xl border border-solid border-green-800 px-3 py-1 flex flex-row gap-1">
                         <img src="/assets/icon/ic_stargroup.svg" />
                         <div className="font-medium">Features</div>
@@ -11,9 +11,9 @@ const Dive = () => {
                         Dive Deeper into Crypto with On-Chain Intelligence
                     </div>
                 </div>
-                <p className="text-white/75">Soon to be integrated across all our features, $CDBD empowers you to navigate the crypto landscape with confidence.</p>
+                <p className="text-white/75 mt-2">Soon to be integrated across all our features, $CDBD empowers you to navigate the crypto landscape with confidence.</p>
             </div>
-            <div className="flex flex-col md:flex-row gap-5 items-center justify-center">
+            <div className="flex flex-col md:flex-row gap-5 items-center justify-center mt-12">
                 <div className="w-[237px] flex flex-col gap-4 items-center">
                     <div className="w-[88px] h-[88px] p-3 rounded-[99px] bg-gradient-to-t from-gray-600/5 to-white/5">
                         <div className="w-full h-full rounded-[99px] bg-[#68EAF20F] flex items-center justify-center">
